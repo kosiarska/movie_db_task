@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "786351113511",
+    "project_id": "moviedbdemo-3a831",
+    "storage_bucket": "moviedbdemo-3a831.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786351113511:android:2387d67d7ec0eac8179502",
+        "android_client_info": {
+          "package_name": "pl.tretowicz.moviedb.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786351113511-lr0tuglmlq0vb434g6i8niosjb94ac3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl7ieL-ENbXJD__SxNfUXAokVoyRgHh_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786351113511-lr0tuglmlq0vb434g6i8niosjb94ac3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

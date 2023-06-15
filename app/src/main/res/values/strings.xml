@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">MovieDbDemo</string>
+
+  <string name="no_description">Brak opisu</string>
+  <string name="release_date">Data wydania: %s</string>
+  <string name="votes_average">Ocena: %s</string>
+  <string name="details_title">Szczegóły filmu</string>
+  <string name="movie_list">Lista filmów</string>
+  <string name="search">Wyszukaj film</string>
+</resources>
