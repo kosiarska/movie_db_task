@@ -45,6 +45,9 @@ import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import coil.request.ImageRequest.Builder
 import pl.tretowicz.moviedb.R
+import pl.tretowicz.moviedbdemo.NavArgs.MOVIE_PARAM
+import pl.tretowicz.moviedbdemo.Routes.MOVIE_DETAILS
+import pl.tretowicz.moviedbdemo.Routes.SEARCH
 import pl.tretowicz.moviedbdemo.domain.model.Movie
 import pl.tretowicz.moviedbdemo.ui.list.MovieListViewModel.Companion.IMAGES_PATH
 import pl.tretowicz.moviedbdemo.utils.rememberForeverLazyListState
@@ -64,10 +67,10 @@ fun MovieList(navController: NavHostController) {
       viewModel.toggleLike(it)
     },
     goToDetails = {
-      navController.navigate("movie_details/${it.id}")
+      navController.navigate(MOVIE_DETAILS.replace(MOVIE_PARAM, it.id.toString()))
     },
     goToSearch = {
-      navController.navigate("search")
+      navController.navigate(SEARCH)
     }
   )
 }

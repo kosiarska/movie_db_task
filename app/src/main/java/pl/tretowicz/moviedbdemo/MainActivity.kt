@@ -9,10 +9,25 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tretowicz.moviedbdemo.NavArgs.MOVIE
+import pl.tretowicz.moviedbdemo.Routes.MOVIE_DETAILS
+import pl.tretowicz.moviedbdemo.Routes.MOVIE_LIST
+import pl.tretowicz.moviedbdemo.Routes.SEARCH
 import pl.tretowicz.moviedbdemo.ui.details.MovieDetails
 import pl.tretowicz.moviedbdemo.ui.list.MovieList
 import pl.tretowicz.moviedbdemo.ui.search.SearchQuery
 import pl.tretowicz.moviedbdemo.ui.theme.MovieDbDemoTheme
+
+object Routes {
+  const val MOVIE_LIST = "movie_list"
+  const val MOVIE_DETAILS = "movie_details/{movie}"
+  const val SEARCH = "search"
+}
+
+object NavArgs {
+  const val MOVIE = "movie"
+  const val MOVIE_PARAM = "{movie}"
+}
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,14 +39,14 @@ class MainActivity : ComponentActivity() {
 
         val navController = rememberNavController()
 
-        NavHost(navController = navController, startDestination = "movie_list") {
-          composable("movie_list") { MovieList(navController) }
-          composable("movie_details/{movie}", arguments = listOf(
-            navArgument(name = "movie", builder = { type = NavType.LongType })
+        NavHost(navController = navController, startDestination = MOVIE_LIST) {
+          composable(MOVIE_LIST) { MovieList(navController) }
+          composable(MOVIE_DETAILS, arguments = listOf(
+            navArgument(name = MOVIE, builder = { type = NavType.LongType })
           )) {
             MovieDetails(navController)
           }
-          composable("search") {
+          composable(SEARCH) {
             SearchQuery(navController)
           }
         }

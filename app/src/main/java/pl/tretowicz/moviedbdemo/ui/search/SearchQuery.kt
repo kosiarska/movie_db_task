@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import pl.tretowicz.moviedb.R
+import pl.tretowicz.moviedbdemo.NavArgs
+import pl.tretowicz.moviedbdemo.Routes.MOVIE_DETAILS
 import pl.tretowicz.moviedbdemo.ui.list.MovieItem
 import pl.tretowicz.moviedbdemo.ui.views.AutoCompleteUI
 
@@ -68,7 +70,7 @@ fun SearchQuery(navController: NavHostController) {
             viewModel.toggleLike(it)
           },
           goToDetails = {
-            navController.navigate("movie_details/${it.id}")
+            navController.navigate(MOVIE_DETAILS.replace(NavArgs.MOVIE_PARAM, it.id.toString()))
           },
           likedMovies = state.likedMovies
         )
