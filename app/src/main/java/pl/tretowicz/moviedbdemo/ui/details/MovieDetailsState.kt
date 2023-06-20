@@ -7,7 +7,8 @@ data class MovieDetailsState(
   val overview: String = "",
   val releaseDate: String = "",
   val voteAverage: String = "",
-  val isLiked: Boolean = false
+  val isLiked: Boolean = false,
+  val isLoading: Boolean = true
 ) {
   companion object {
     fun empty() = MovieDetailsState()

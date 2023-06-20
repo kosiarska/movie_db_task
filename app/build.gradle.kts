@@ -139,6 +139,11 @@ dependencies {
   implementation("androidx.paging:paging-common-ktx:3.1.1")
   implementation("androidx.paging:paging-compose:3.2.0-beta01")
 
+
+  implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+  implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+  implementation("androidx.paging:paging-runtime-ktx:3.1.1")
+
   debugImplementation(libs.compose.ui.tooling)
   implementation(libs.compose.ui.viewbinding)
 

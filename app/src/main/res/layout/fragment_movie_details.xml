@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+      android:id="@+id/image"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:scaleType="centerCrop"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="15dp"
+      android:layout_marginTop="10dp"
+      android:textSize="23sp"
+      android:textStyle="bold"
+      app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <TextView
+      android:id="@+id/description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="15dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+    <TextView
+      android:id="@+id/releaseDate"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="15dp"
+      android:layout_marginTop="10dp"
+      android:textStyle="bold"
+      app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <TextView
+      android:id="@+id/votesAverage"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="15dp"
+      android:layout_marginTop="10dp"
+      android:textStyle="bold"
+      app:layout_constraintTop_toBottomOf="@+id/releaseDate" />
+
+    <FrameLayout
+      android:id="@+id/loading"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/white">
+
+      <ProgressBar
+        style="@style/Widget.MaterialComponents.CircularProgressIndicator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:layout_gravity="center" />
+    </FrameLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

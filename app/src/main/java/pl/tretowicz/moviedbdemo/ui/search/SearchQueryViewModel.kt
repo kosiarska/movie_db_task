@@ -85,11 +85,6 @@ class SearchQueryViewModel @Inject constructor(
   }
 
   fun search(query: String) {
-    _state.update {
-      _state.value.copy(
-        query = query
-      )
-    }
     inputPhrase.update { query }
   }
 

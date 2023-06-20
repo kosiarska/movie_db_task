@@ -1,22 +1,25 @@
 package pl.tretowicz.moviedbdemo
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.createGraph
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.fragment
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tretowicz.moviedb.R
+import pl.tretowicz.moviedb.R.drawable
+import pl.tretowicz.moviedb.R.string
+import pl.tretowicz.moviedb.databinding.ActivityMainBinding
 import pl.tretowicz.moviedbdemo.NavArgs.MOVIE
 import pl.tretowicz.moviedbdemo.Routes.MOVIE_DETAILS
 import pl.tretowicz.moviedbdemo.Routes.MOVIE_LIST
 import pl.tretowicz.moviedbdemo.Routes.SEARCH
-import pl.tretowicz.moviedbdemo.ui.details.MovieDetails
-import pl.tretowicz.moviedbdemo.ui.list.MovieList
-import pl.tretowicz.moviedbdemo.ui.search.SearchQuery
-import pl.tretowicz.moviedbdemo.ui.theme.MovieDbDemoTheme
+import pl.tretowicz.moviedbdemo.ui.details.MovieDetailsFragment
+import pl.tretowicz.moviedbdemo.ui.list.MovieListFragment
+import pl.tretowicz.moviedbdemo.ui.search.SearchQueryFragment
+import pl.tretowicz.moviedbdemo.utils.hideSoftKeyboard
 
 object Routes {
   const val MOVIE_LIST = "movie_list"
@@ -30,27 +33,70 @@ object NavArgs {
 }
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+  private lateinit var binding: ActivityMainBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContent {
-      MovieDbDemoTheme {
+    binding = ActivityMainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
-        val navController = rememberNavController()
+    setSupportActionBar(binding.toolbar)
 
-        NavHost(navController = navController, startDestination = MOVIE_LIST) {
-          composable(MOVIE_LIST) { MovieList(navController) }
-          composable(MOVIE_DETAILS, arguments = listOf(
-            navArgument(name = MOVIE, builder = { type = NavType.LongType })
-          )) {
-            MovieDetails(navController)
-          }
-          composable(SEARCH) {
-            SearchQuery(navController)
-          }
+    val navController = getNavController()
+
+    listenToFragmentChange()
+
+    navController.graph = navController.createGraph(
+      startDestination = MOVIE_LIST
+    ) {
+      fragment<MovieListFragment>(MOVIE_LIST)
+
+      fragment<MovieDetailsFragment>(MOVIE_DETAILS) {
+        argument(MOVIE) {
+          type = NavType.LongType
+        }
+      }
+
+      fragment<SearchQueryFragment>(SEARCH)
+    }
+
+    binding.toolbar.setNavigationOnClickListener {
+      navController.popBackStack()
+    }
+  }
+
+  private fun listenToFragmentChange() {
+    getNavController().addOnDestinationChangedListener { _, destination, _ ->
+
+      hideSoftKeyboard()
+
+      val titleMap = hashMapOf<String, String>().apply {
+        put(SEARCH, getString(string.search))
+        put(MOVIE_DETAILS, getString(string.details_title))
+        put(MOVIE_LIST, getString(string.movie_list))
+      }
+      binding.toolbar.title = titleMap[destination.route]
+
+      when (destination.route) {
+        SEARCH -> {
+          binding.toolbar.setNavigationIcon(drawable.baseline_arrow_back_24)
+        }
+
+        MOVIE_DETAILS -> {
+          binding.toolbar.setNavigationIcon(drawable.baseline_arrow_back_24)
+        }
+
+        else -> {
+          binding.toolbar.navigationIcon = null
         }
       }
     }
+  }
+
+  private fun getNavController(): NavController {
+    val fragment = binding.navHost.getFragment<NavHostFragment>()
+    return fragment.navController
   }
 }
